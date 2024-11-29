@@ -31,7 +31,7 @@ t_list	*ft_create_list(int value)
 	return (ls_new);
 }
 
-t_list	*ft_append_node(t_list *head, int value)
+t_list	*ft_append_list(t_list *head, int value)
 {
 	t_list	*new;
 	t_list	*current;
