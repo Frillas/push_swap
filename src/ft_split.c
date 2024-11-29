@@ -9,88 +9,79 @@
 /*   Updated: 2024/11/28 19:14:14 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../header/push_swap.h"
 
-static int	ft_countwords(char const *s, char c, int i, int count)
+static int	ft_countwords(char const *s, char c)
 {
 	int	find;
+	int	count;
 
 	find = 0;
-	if (s[0] == '\0' && c == '\0')
-		return (0);
-	while (s[i] == c || s[i] == '"')
-		i++;
-	while (s[i] != '\0')
+	count = 0;
+	while (*s)
 	{
-		if ((s[i] != c) && (find == 0))
+		if ((*s != c) && (find == 0))
 		{
 			find = 1;
 			count++;
-			i++;
 		}
-		else if ((s[i] == c) && (find == 1))
-		{
+		else if (*s == c)
 			find = 0;
-			i++;
-		}
-		else
-			i++;
+		s++;
 	}
 	return (count);
 }
 
-static int	ft_count_char(char const *s, char c, int i)
+static int	ft_wordlen(char const *s, char c)
 {
-	int	j;
+	int	len;
 
-	j = 0;
-	while (s[i] && s[i] != c)
-	{
-		j++;
-		i++;
-	}
-	return (j);
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
 }
 
-static void	ft_add_char(char *dest, char const *s, char c, int *i)
-{
-	int	j;
-
-	j = 0;
-	while (s[*i] && s[*i] != c)
-	{
-		dest[j] = s[*i];
-		(*i)++;
-		j++;
-	}
-	dest[j] = '\0';
-}
-
-static char	**ft_sort(char const *s, char c, int words, char **str)
+static void	ft_copyword(char *dest, char const *s, int len)
 {
 	int	i;
-	int	j;
-	int	k;
 
 	i = 0;
+	while (i < len)
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[len] = '\0';
+}
+
+static char	**ft_sort(char const *s, char c, int words)
+{
+	int		len;
+	int		k;
+	char	**str;
+
 	k = 0;
+	str = (char **) ft_calloc ((words + 1), (sizeof(char *)));
 	while (k < words)
 	{
-		while (s[i] == c)
-			i++;
-		j = ft_count_char(s, c, i);
-		str[k] = (char *) ft_calloc((j + 1), (sizeof(char)));
+		while (*s == c)
+			s++;
+		len = ft_wordlen(s, c);
+		str[k] = (char *) ft_calloc((len + 1), (sizeof(char)));
 		if (str[k] == NULL)
 		{
-			while (k >= 0)
+			while (k > 0)
 				free (str[k--]);
 			free (str);
 			return (NULL);
 		}
-		ft_add_char(str[k], s, c, &i);
+		ft_copyword(str[k], s, len);
 		k++;
+		s += len;
 	}
-	str[k] = NULL;
+	str[words] = NULL;
 	return (str);
 }
 
@@ -101,10 +92,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	words = ft_countwords(s, c, 0, 0);
-	str = (char **) ft_calloc ((words + 1), (sizeof(char *)));
-	if (str == NULL)
-		return (0);
-	str = ft_sort(s, c, words, str);
+	words = ft_countwords(s, c);
+	str = ft_sort(s, c, words);
 	return (str);
 }

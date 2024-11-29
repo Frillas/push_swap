@@ -12,24 +12,24 @@
 
 #include "../header/push_swap.h"
 
-bool	ft_isdigit(char *s)
+t_bool	ft_isdigit(char *s)
 {
 	int		i;
-	bool	res;
+	t_bool	res;
 
 	i = 0;
-	res = false;
+	res = FALSE;
 	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
 		i++;
 	if (s[i] == '+' || s[i] == '-')
 		i++;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
-		res = true;
+		res = TRUE;
 		i++;
 	}
 	if ((res) && (s[i] == '\0'))
-		return (true);
+		return (TRUE);
 	else
-		return (false);
+		return (FALSE);
 }

@@ -12,17 +12,17 @@
 
 #include "../header/push_swap.h"
 
-bool	ft_check_value(t_list *head, int value)
+t_bool	ft_check_value(t_list *head, int value)
 {
 	t_list	*current;
-	bool	res;
+	t_bool	res;
 
 	current = head;
-	res = true;
-	while ((current != NULL) && (res == true))
+	res = TRUE;
+	while ((current != NULL) && (res == TRUE))
 	{
 		if (current->content == value)
-			res = false;
+			res = FALSE;
 		current = current->next;
 	}
 	return (res);
@@ -52,7 +52,7 @@ t_list	*ft_create_list(t_list *head, int value)
 	return (ls_new);
 }
 
-t_list	*ft_append_list(t_list *head, int value)
+t_list	*ft_add_to_list(t_list *head, int value, char **result)
 {
 	t_list	*new;
 	t_list	*current;
@@ -60,7 +60,8 @@ t_list	*ft_append_list(t_list *head, int value)
 	if (!ft_check_value(head, value))
 	{
 		std_error();
-		exit(EXIT_FAILURE);
+		ft_free(result, head);
+		return (NULL);
 	}
 	else
 	{
@@ -96,11 +97,6 @@ void	ft_print_list(t_list *head)
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
 	if (argc < 2)
 	{
 		std_error();

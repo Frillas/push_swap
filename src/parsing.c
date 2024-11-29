@@ -17,11 +17,31 @@ void	std_error(void)
 	write(2, "Error\n", 6);
 }
 
-t_list	*ft_sort_list(char **result, t_list *head)
+void	ft_free(char **result, t_list *head)
+{
+	int		i;
+	t_list	*current;
+
+	i = 0;
+	current = head;
+	while (current != NULL)
+	{
+		head = head->next;
+		free(current);
+		current = head;
+	}
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
+}
+
+t_list	*ft_build_list(char **result, t_list *head)
 {
 	int		i;
 	int		value;
-	t_list	*current;
 
 	i = 0;
 	while (result[i] != NULL)
@@ -29,23 +49,11 @@ t_list	*ft_sort_list(char **result, t_list *head)
 		if (!ft_isdigit(result[i]))
 		{
 			std_error();
-			current = head;
-			while (current != NULL)
-			{
-				head = head->next;
-				free(current);
-				current = head;
-			}
-			while ((i >= 0) && (result[i]))
-			{
-				free(result[i]);
-				i--;
-			}
-			free(result);
+			ft_free(result, head);
 			return (NULL);
 		}
 		value = ft_atoi(result[i]);
-		head = ft_append_list(head, value);
+		head = ft_add_to_list(head, value, result);
 		if (head == NULL)
 			return (NULL);
 		free (result[i]);
@@ -68,7 +76,7 @@ void	ft_parsing(int argc, char **argv)
 		result = ft_split(argv[i], ' ');
 		if (result == NULL)
 			return ;
-		head = ft_sort_list(result, head);
+		head = ft_build_list(result, head);
 		if (head == NULL)
 			return ;
 		i++;
