@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:06:58 by aroullea          #+#    #+#             */
-/*   Updated: 2024/11/29 10:30:13 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:00:09 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 bool	ft_isdigit(char *s)
 {
-	int	i;
-	bool res;
+	int		i;
+	bool	res;
 
 	i = 0;
 	res = false;
