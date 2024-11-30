@@ -10,32 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../header/ft_build.h"
 
 void	std_error(void)
 {
 	write(2, "Error\n", 6);
-}
-
-void	ft_free(char **result, t_list *head)
-{
-	int		i;
-	t_list	*current;
-
-	i = 0;
-	current = head;
-	while (current != NULL)
-	{
-		head = head->next;
-		free(current);
-		current = head;
-	}
-	while (result[i])
-	{
-		free(result[i]);
-		i++;
-	}
-	free(result);
 }
 
 t_list	*ft_build_list(char **result, t_list *head)

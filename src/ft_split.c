@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../header/ft_split.h"
 
 static int	ft_countwords(char const *s, char c)
 {
