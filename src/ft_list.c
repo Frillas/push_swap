@@ -108,6 +108,8 @@ void	ft_free(char **result, t_list *head)
 		free(current);
 		current = head;
 	}
+	while (result[i] == NULL)
+		i++;
 	while (result[i])
 	{
 		free(result[i]);

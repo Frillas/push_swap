@@ -56,14 +56,12 @@ static void	ft_copyword(char *dest, char const *s, int len)
 	dest[len] = '\0';
 }
 
-static char	**ft_sort(char const *s, char c, int words)
+static char	**ft_sort(char const *s, char **str, char c, int words)
 {
 	int		len;
 	int		k;
-	char	**str;
 
 	k = 0;
-	str = (char **) ft_calloc ((words + 1), (sizeof(char *)));
 	while (k < words)
 	{
 		while (*s == c)
@@ -93,6 +91,9 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words = ft_countwords(s, c);
-	str = ft_sort(s, c, words);
+	str = (char **) ft_calloc ((words + 1), (sizeof(char *)));
+	if (str == NULL)
+		return (NULL);
+	str = ft_sort(s, str, c, words);
 	return (str);
 }

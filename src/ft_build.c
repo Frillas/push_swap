@@ -19,23 +19,26 @@ void	std_error(void)
 
 t_list	*ft_build_list(char **result, t_list *head)
 {
-	int		i;
-	int		value;
+	int			i;
+	long int	value;
+	t_bool		res;
 
 	i = 0;
 	while (result[i] != NULL)
 	{
-		if (!ft_isdigit(result[i]))
+		value = 0;
+		res = ft_atoi_valid(result[i], &value);
+		if (!res || ((value > 2147483647) || (value < -2147483647)))
 		{
 			std_error();
 			ft_free(result, head);
 			return (NULL);
 		}
-		value = ft_atoi(result[i]);
 		head = ft_add_to_list(head, value, result);
 		if (head == NULL)
 			return (NULL);
 		free (result[i]);
+		result[i] = NULL;
 		i++;
 	}
 	free(result);

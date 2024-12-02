@@ -30,7 +30,11 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*p;
 	size_t	n;
+	size_t	max_size;
 
+	max_size = (size_t)-1;
+	if ((nmemb != 0) && (size > max_size / nmemb))
+		return (NULL);
 	n = nmemb * size;
 	p = (void *) malloc(n);
 	if (p == NULL)
@@ -39,15 +43,15 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
-int	ft_atoi(const char *s)
+t_bool	ft_atoi_valid(const char *s, long int *value)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	int		sign;
+	t_bool	res;
 
 	i = 0;
 	sign = 1;
-	result = 0;
+	res = FALSE;
 	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
 		i++;
 	if (s[i] == '+' || s[i] == '-')
@@ -57,25 +61,9 @@ int	ft_atoi(const char *s)
 		i++;
 	}
 	while (s[i] >= '0' && s[i] <= '9')
-		result = (result * 10) + (s[i++] - '0');
-	return (result * sign);
-}
-
-t_bool	ft_isdigit(char *s)
-{
-	int		i;
-	t_bool	res;
-
-	i = 0;
-	res = FALSE;
-	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
-		i++;
-	if (s[i] == '+' || s[i] == '-')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
 	{
 		res = TRUE;
-		i++;
+		*value = (*value * 10) + (s[i++] - '0');
 	}
 	if ((res == TRUE) && (s[i] == '\0'))
 		return (TRUE);
