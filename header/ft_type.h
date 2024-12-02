@@ -9,7 +9,7 @@ typedef int	t_bool;
 typedef struct s_list
 {
 	int				content;
-	struct s_list	*pred;
+	struct s_list	*prev;
 	struct s_list	*next;
 }	t_list;
 

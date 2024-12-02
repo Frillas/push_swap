@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_build.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 16:04:54 by aroullea          #+#    #+#             */
-/*   Updated: 2024/11/29 17:37:20 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:52:41 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_list	*ft_build_list(char **result, t_list *head)
 	{
 		value = 0;
 		res = ft_atoi_valid(result[i], &value);
-		if (!res || ((value > 2147483647) || (value < -2147483647)))
+		if (!res || ((value > 2147483647) || (value < -2147483648)))
 		{
 			std_error();
 			ft_free(result, head);
@@ -37,15 +37,13 @@ t_list	*ft_build_list(char **result, t_list *head)
 		head = ft_add_to_list(head, value, result);
 		if (head == NULL)
 			return (NULL);
-		free (result[i]);
-		result[i] = NULL;
 		i++;
 	}
-	free(result);
+	ft_free(result, NULL);
 	return (head);
 }
 
-void	ft_parsing(int argc, char **argv)
+t_list	*ft_parsing(int argc, char **argv)
 {
 	int		i;
 	char	**result;
@@ -57,11 +55,18 @@ void	ft_parsing(int argc, char **argv)
 	{
 		result = ft_split(argv[i], ' ');
 		if (result == NULL)
-			return ;
-		head = ft_build_list(result, head);
-		if (head == NULL)
-			return ;
+			return (NULL);
+		else if (result[0] == NULL)
+			ft_free(result, NULL);
+		else
+		{
+			head = ft_build_list(result, head);
+			if (head == NULL)
+				return (NULL);
+		}
 		i++;
 	}
-	ft_print_list(head);
+	if (head != NULL)
+		ft_print_list(head);
+	return (head);
 }

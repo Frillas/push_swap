@@ -5,6 +5,6 @@
 
 void	*ft_calloc(size_t nmemb, size_t size);
 t_bool	ft_atoi_valid(const char *s, long int *value);
-//t_bool		ft_isdigit(char *s);
+void	ft_free(char **result, t_list *head);
 
 #endif

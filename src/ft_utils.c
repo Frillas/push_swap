@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:01:38 by aroullea          #+#    #+#             */
-/*   Updated: 2024/11/29 15:59:30 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:48:09 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,30 @@ t_bool	ft_atoi_valid(const char *s, long int *value)
 		res = TRUE;
 		*value = (*value * 10) + (s[i++] - '0');
 	}
+	*value = *value * sign;
 	if ((res == TRUE) && (s[i] == '\0'))
 		return (TRUE);
 	else
 		return (FALSE);
+}
+
+void	ft_free(char **result, t_list *head)
+{
+	int		i;
+	t_list	*current;
+
+	i = 0;
+	current = head;
+	while (current != NULL)
+	{
+		head = head->next;
+		free(current);
+		current = head;
+	}
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
 }

@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:56:35 by aroullea          #+#    #+#             */
-/*   Updated: 2024/11/29 17:35:30 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:47:21 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ t_list	*ft_create_list(t_list *head, int value)
 		return (NULL);
 	}
 	ls_new->content = value;
-	ls_new->pred = NULL;
+	ls_new->prev = NULL;
 	ls_new->next = NULL;
 	return (ls_new);
 }
 
 t_list	*ft_add_to_list(t_list *head, int value, char **result)
 {
-	t_list	*new;
-	t_list	*current;
+	t_list			*new;
+	static t_list	*end;
 
 	if (!ft_check_value(head, value))
 	{
@@ -53,12 +53,13 @@ t_list	*ft_add_to_list(t_list *head, int value, char **result)
 		if (new == NULL)
 			return (0);
 		else if (head == NULL)
+		{
+			end = new;
 			return (new);
-		current = head;
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new;
-		new->pred = current;
+		}
+		end->next = new;
+		new->prev = end;
+		end = new;
 		return (head);
 	}
 }
@@ -93,27 +94,4 @@ void	ft_print_list(t_list *head)
 		free (current);
 		current = head;
 	}
-}
-
-void	ft_free(char **result, t_list *head)
-{
-	int		i;
-	t_list	*current;
-
-	i = 0;
-	current = head;
-	while (current != NULL)
-	{
-		head = head->next;
-		free(current);
-		current = head;
-	}
-	while (result[i] == NULL)
-		i++;
-	while (result[i])
-	{
-		free(result[i]);
-		i++;
-	}
-	free(result);
 }
