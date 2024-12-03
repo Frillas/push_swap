@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:56:35 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/02 12:03:11 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:37:28 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int	main(int argc, char **argv)
 	t_bool	sort_numb;
 
 	sort_numb = TRUE;
+	head = NULL;
 	if (argc >= 2)
 	{
 		head = ft_parsing(argc, argv, &end);
 		if (head != NULL)
 		{
 			len = ft_count_list(head, &sort_numb);
-			if ((sort_numb == FALSE) && (len == 3))
+			if ((sort_numb == FALSE) && (len <= 3))
 			{
 				head = ft_sort_list(head, end);
 				ft_print_list(head);

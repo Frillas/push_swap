@@ -1,5 +1,5 @@
 #ifndef FT_INSTRUCTIONS_H
-# define FT_INSTRUCTION_H
+# define FT_INSTRUCTIONS_H
 #include "ft_sort_list.h"
 
 t_list	*ft_ra(t_list *head, t_list *end);
