@@ -85,10 +85,38 @@ void	ft_free(char **result, t_list *head)
 		free(current);
 		current = head;
 	}
-	while (result[i])
+	if (result != NULL)
 	{
-		free(result[i]);
-		i++;
+		while (result[i])
+		{
+			free(result[i]);
+			i++;
+		}
+		free(result);
 	}
-	free(result);
+}
+
+int	ft_count_list(t_list *head, t_bool *sort_numb)
+{
+	int		len;
+	t_list	*current;
+
+	len = 0;
+	current = head->next;
+	while (head != NULL)
+	{
+		if ((*sort_numb == TRUE) && (current != NULL))
+		{
+			if (head->content < current->content)
+				*sort_numb = TRUE;
+			else
+				*sort_numb = FALSE;
+		}
+		len++;
+		if (current == NULL)
+			break ;
+		head = head->next;
+		current = current->next;
+	}
+	return (len);
 }

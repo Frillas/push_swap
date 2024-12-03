@@ -15,11 +15,24 @@
 int	main(int argc, char **argv)
 {
 	t_list	*head;
+	t_list	*end;
+	int		len;
+	t_bool	sort_numb;
 
+	sort_numb = TRUE;
 	if (argc >= 2)
 	{
-		head = ft_parsing(argc, argv);
+		head = ft_parsing(argc, argv, &end);
 		if (head != NULL)
+		{
+			len = ft_count_list(head, &sort_numb);
+			if ((sort_numb == FALSE) && (len == 3))
+			{
+				head = ft_sort_list(head, end);
+				ft_print_list(head);
+			}
+		}
 	}
+	ft_free(NULL, head);
 	return (0);
 }

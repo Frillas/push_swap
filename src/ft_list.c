@@ -12,22 +12,16 @@
 
 #include "../header/ft_list.h"
 
-t_list	*ft_create_list(t_list *head, int value)
+t_list	*ft_create_list(t_list *head, int value, char **result)
 {
 	t_list	*ls_new;
-	t_list	*current;
 
 	ls_new = NULL;
 	ls_new = (t_list *) malloc (sizeof(t_list));
 	if (ls_new == NULL)
 	{
-		current = head;
-		while (current != NULL)
-		{
-			head = head->next;
-			free(current);
-			current = head;
-		}
+		std_error();
+		ft_free(result, head);
 		return (NULL);
 	}
 	ls_new->content = value;
@@ -36,35 +30,31 @@ t_list	*ft_create_list(t_list *head, int value)
 	return (ls_new);
 }
 
-t_list	*ft_add_to_list(t_list *head, int value, char **result)
+t_list	*ft_add_to_list(t_list **head, t_list **end, int value, char **result)
 {
 	t_list			*new;
-	static t_list	*end;
 
-	if (!ft_check_value(head, value))
-	{
-		std_error();
-		ft_free(result, head);
+	if (!ft_check_value(*head, value, result))
 		return (NULL);
-	}
 	else
 	{
-		new = ft_create_list(head, value);
+		new = ft_create_list(*head, value, result);
 		if (new == NULL)
-			return (0);
-		else if (head == NULL)
+			return (NULL);
+		else if (*head == NULL)
 		{
-			end = new;
-			return (new);
+			*head = new;
+			*end = new;
+			return (*head);
 		}
-		end->next = new;
-		new->prev = end;
-		end = new;
-		return (head);
+		(*end)->next = new;
+		new->prev = (*end);
+		(*end) = new;
+		return (*head);
 	}
 }
 
-t_bool	ft_check_value(t_list *head, int value)
+t_bool	ft_check_value(t_list *head, int value, char **result)
 {
 	t_list	*current;
 	t_bool	res;
@@ -76,6 +66,11 @@ t_bool	ft_check_value(t_list *head, int value)
 		if (current->content == value)
 			res = FALSE;
 		current = current->next;
+	}
+	if (res == FALSE)
+	{
+		std_error();
+		ft_free(result, head);
 	}
 	return (res);
 }
@@ -90,8 +85,8 @@ void	ft_print_list(t_list *head)
 	while (current != NULL)
 	{
 		head = head->next;
-		printf("%d\n", current->content);
-		free (current);
+		printf("%d ", current->content);
 		current = head;
 	}
+	printf("\n");
 }

@@ -17,7 +17,7 @@ void	std_error(void)
 	write(2, "Error\n", 6);
 }
 
-t_list	*ft_build_list(char **result, t_list *head)
+t_list	*ft_build_list(char **result, t_list *head, t_list **end)
 {
 	int			i;
 	long int	value;
@@ -34,7 +34,7 @@ t_list	*ft_build_list(char **result, t_list *head)
 			ft_free(result, head);
 			return (NULL);
 		}
-		head = ft_add_to_list(head, value, result);
+		head = ft_add_to_list(&head, end, value, result);
 		if (head == NULL)
 			return (NULL);
 		i++;
@@ -43,7 +43,7 @@ t_list	*ft_build_list(char **result, t_list *head)
 	return (head);
 }
 
-t_list	*ft_parsing(int argc, char **argv)
+t_list	*ft_parsing(int argc, char **argv, t_list **end)
 {
 	int		i;
 	char	**result;
@@ -60,13 +60,11 @@ t_list	*ft_parsing(int argc, char **argv)
 			ft_free(result, NULL);
 		else
 		{
-			head = ft_build_list(result, head);
+			head = ft_build_list(result, head, end);
 			if (head == NULL)
 				return (NULL);
 		}
 		i++;
 	}
-	if (head != NULL)
-		ft_print_list(head);
 	return (head);
 }
