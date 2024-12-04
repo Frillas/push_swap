@@ -27,11 +27,11 @@ int	main(int argc, char **argv)
 		if (head != NULL)
 		{
 			len = ft_count_list(head, &sort_numb);
-			if ((sort_numb == FALSE) && (len <= 3))
-			{
-				head = ft_sort_list(head, end);
-				ft_print_list(head);
-			}
+			if ((!sort_numb) && (len <= 3))
+				head = ft_sort_three(head, end);
+			else if ((!sort_numb) && (len <= 5))
+				head = ft_sort_five(head, end);
+			ft_print_list(head);
 		}
 	}
 	ft_free(NULL, head);

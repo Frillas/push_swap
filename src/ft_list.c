@@ -80,8 +80,6 @@ void	ft_print_list(t_list *head)
 	t_list	*current;
 
 	current = head;
-	if (current->next == NULL)
-		return ;
 	while (current != NULL)
 	{
 		head = head->next;
