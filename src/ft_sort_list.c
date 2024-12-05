@@ -38,67 +38,61 @@ t_list	*ft_sort_three(t_list *head, t_list *end)
 	return (head);
 }
 
-t_list	*ft_sort_five(t_list *stack_a, t_list *end)
+t_list	*ft_sort_five(t_list *stack_a, t_list *end, int len)
 {
 	t_list	*stack_b;
 	int		min;
-	int		max;
+	int		min_pos;
+	int		i;
+	int		size;
 
-	max = stack_a->content;
-	min = stack_a->content;
 	stack_b = NULL;
-	ft_min_max(&stack_a, &stack_b, &min, &max);
-	end = stack_a;
-	while (end->next != NULL)
-		end = end->next;
-	stack_a = ft_sort_three(stack_a, end);
-	while (end->next != NULL)
-		end = end->next;
-	while (stack_b != NULL)
+	i = 0;
+	min = stack_a->content;
+	min_pos = ft_min_max(stack_a, &min);
+	size = len - 3;
+	while (i < size)
 	{
-		if (stack_b->content < stack_a->content)
-			ft_pb(&stack_b, &stack_a);
+		if (min_pos <= (len / 2))
+		{
+			while ((min_pos--) > 0)
+				ft_ra(&stack_a, &end);
+		}
 		else
 		{
-			ft_pb(&stack_b, &stack_a);
-			ft_ra(&stack_a, &end);
+			while ((min_pos++) < len)
+				ft_rra(&stack_a, &end);
 		}
+		ft_pa(&stack_a, &stack_b);
+		min_pos = ft_min_max(stack_a, &min);
+		i++;
+		len--;
 	}
+	stack_a = ft_sort_three(stack_a, end);
+	while (stack_b != NULL)
+		ft_pb(&stack_b, &stack_a);
 	return (stack_a);
 }
 
-void	ft_min_max(t_list **stack_a, t_list **stack_b, int *min, int *max)
+int	ft_min_max(t_list *stack_a, int *min)
 {
 	t_list	*current;
-	t_list	*end;
-	int		i;
+	int		min_pos;
+	int		pos;
 
-	end = (*stack_a);
-	current = (*stack_a)->next;
-	i = 0;
-	while (end->next != NULL)
-		end = end->next;
+	current = stack_a;
+	pos = 0;
+	min_pos = 0;
+	*min = current->content;
 	while (current != NULL)
 	{
-		if (current->content > *max)
-			*max = current->content;
-		else if (current->content < *min)
+		if (current->content < *min)
+		{
 			*min = current->content;
+			min_pos = pos;
+		}
 		current = current->next;
+		pos++;
 	}
-	while (i < 2)
-	{
-		if ((*stack_a)->content == *max)
-		{
-			ft_pa(stack_a, stack_b);
-			i++;
-		}
-		else if ((*stack_a)->content == *min)
-		{
-			ft_pa(stack_a, stack_b);
-			i++;
-		}
-		else
-			ft_ra(stack_a, &end);
-	}
+	return (min_pos);
 }

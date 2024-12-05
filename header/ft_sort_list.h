@@ -6,7 +6,7 @@
 #include "ft_instru_stack_b.h"
 
 t_list	*ft_sort_three(t_list *head, t_list *end);
-t_list	*ft_sort_five(t_list *stack_a, t_list *end);
-void	ft_min_max(t_list **stack_a, t_list **stack_b, int *min, int *max);
+t_list	*ft_sort_five(t_list *stack_a, t_list *end, int len);
+int	ft_min_max(t_list *stack_a, int *min);
 
 #endif

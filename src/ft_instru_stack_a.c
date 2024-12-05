@@ -53,14 +53,14 @@ void	ft_rra(t_list **head, t_list **end)
 {
 	t_list	*current;
 
-	current = (*head)->next;
-	(*head)->prev = *end;
-	(*head)->next = current;
-	current->next = NULL;
-	(*end)->prev = NULL;
+	current = *head;
 	(*end)->next = *head;
-	*head = *end;
-	*end = current;
+	(*end) = (*end)->prev;
+	(*head) = (*end)->next;
+	(*end)->next = NULL;
+	current->prev = *head;
+	(*head)->prev = NULL;
+	(*head)->next = current;
 	write(1, "rra\n", 4);
 }
 
