@@ -64,7 +64,7 @@ void	ft_rra(t_list **head, t_list **end)
 	write(1, "rra\n", 4);
 }
 
-void	ft_pa(t_list **stack_a, t_list **stack_b)
+void	ft_pb(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*current_a;
 	t_list	*current_b;
@@ -87,5 +87,5 @@ void	ft_pa(t_list **stack_a, t_list **stack_b)
 		current_a->prev = NULL;
 	}
 	*stack_a = current_a;
-	write(1, "pa\n", 3);
+	write(1, "pb\n", 3);
 }

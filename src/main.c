@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 			len = ft_count_list(head, &sort_numb);
 			if ((!sort_numb) && (len <= 3))
 				head = ft_sort_three(head, end);
-			else if ((!sort_numb) && (len <= 10))
+			else if ((!sort_numb)&&(len <= 5)
 				head = ft_sort_five(head, end, len);
 			ft_print_list(head);
 		}

@@ -12,7 +12,7 @@
 
 #include "../header/ft_instru_stack_b.h"
 
-void	ft_pb(t_list **stack_b, t_list **stack_a)
+void	ft_pa(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*current_b;
 
@@ -32,5 +32,5 @@ void	ft_pb(t_list **stack_b, t_list **stack_a)
 		*stack_a = *stack_b;
 		*stack_b = NULL;
 	}
-	write(1, "pb\n", 3);
+	write(1, "pa\n", 3);
 }
