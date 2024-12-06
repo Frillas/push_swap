@@ -14,7 +14,8 @@
 
 t_list	*ft_create_list(t_list *head, int value, char **result)
 {
-	t_list	*ls_new;
+	t_list		*ls_new;
+	static int	i;
 
 	ls_new = NULL;
 	ls_new = (t_list *) malloc (sizeof(t_list));
@@ -24,9 +25,11 @@ t_list	*ft_create_list(t_list *head, int value, char **result)
 		ft_free(result, head);
 		return (NULL);
 	}
+	ls_new->index = i;
 	ls_new->content = value;
 	ls_new->prev = NULL;
 	ls_new->next = NULL;
+	i++;
 	return (ls_new);
 }
 
@@ -83,7 +86,7 @@ void	ft_print_list(t_list *head)
 	while (current != NULL)
 	{
 		head = head->next;
-		printf("%d ", current->content);
+		printf("Value: %d, Index: %d\n", current->content, current->index);
 		current = head;
 	}
 	printf("\n");

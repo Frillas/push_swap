@@ -32,6 +32,8 @@ void	ft_sa(t_list **head, t_list **end)
 	current->next = *head;
 	(*end)->prev = *head;
 	(*head) = current;
+	(*head)->index = 0;
+	(*head)->next->index = 1;
 	write(1, "sa\n", 3);
 }
 
@@ -46,6 +48,7 @@ void	ft_ra(t_list **head, t_list **end)
 	(*end)->next = *head;
 	*end = *head;
 	*head = current;
+	update_indexes(*head);
 	write(1, "ra\n", 3);
 }
 
@@ -61,6 +64,7 @@ void	ft_rra(t_list **head, t_list **end)
 	current->prev = *head;
 	(*head)->prev = NULL;
 	(*head)->next = current;
+	update_indexes(*head);
 	write(1, "rra\n", 4);
 }
 
@@ -87,5 +91,7 @@ void	ft_pb(t_list **stack_a, t_list **stack_b)
 		current_a->prev = NULL;
 	}
 	*stack_a = current_a;
+	update_indexes(*stack_a);
+	update_indexes(*stack_b);
 	write(1, "pb\n", 3);
 }

@@ -6,6 +6,7 @@
 # include "ft_type.h"
 # include "ft_list.h"
 # include "ft_utils.h"
+# include "ft_utils_next.h"
 # include "ft_split.h"
 # include "ft_sort_list.h"
 

@@ -24,6 +24,8 @@ void	ft_pa(t_list **stack_b, t_list **stack_a)
 		current_b->prev = NULL;
 		*stack_a = *stack_b;
 		*stack_b = current_b;
+		update_indexes(*stack_a);
+		update_indexes(*stack_b);
 	}
 	else if (current_b == NULL)
 	{
@@ -31,6 +33,7 @@ void	ft_pa(t_list **stack_b, t_list **stack_a)
 		(*stack_a)->prev = *stack_b;
 		*stack_a = *stack_b;
 		*stack_b = NULL;
+		update_indexes(*stack_a);
 	}
 	write(1, "pa\n", 3);
 }
