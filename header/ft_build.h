@@ -21,6 +21,7 @@
 # include "ft_utils_next.h"
 # include "ft_split.h"
 # include "ft_sort_list.h"
+# include "ft_sort_big.h"
 
 void	std_error(void);
 t_list	*ft_build_list(char **result, t_list *head, t_list **end);

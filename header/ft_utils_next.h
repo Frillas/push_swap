@@ -16,5 +16,6 @@
 # include "ft_list.h"
 
 void	update_index(t_list *head);
+int		ft_minimum(int nb1, int nb2);
 
 #endif

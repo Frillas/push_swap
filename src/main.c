@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 				head = ft_sort_three(head, end);
 			else if ((!sort_numb) && (len <= 5))
 				head = ft_sort_five(head, end, len);
+			else if (!sort_numb)
+				head = ft_sort_big(head, len);
 			ft_print_list(head);
 		}
 	}

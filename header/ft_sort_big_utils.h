@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_type.h                                          :+:      :+:    :+:   */
+/*   ft_sort_big_utils.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 10:58:26 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 11:08:21 by aroullea         ###   ########.fr       */
+/*   Created: 2024/12/06 10:57:47 by aroullea          #+#    #+#             */
+/*   Updated: 2024/12/06 10:58:03 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TYPE_H
-# define FT_TYPE_H
+#ifndef FT_SORT_BIG_UTILS_H
+# define FT_SORT_BIG_UTILS_H
 
-# define TRUE 1
-# define FALSE 0
+# include "ft_build.h"
+# include "ft_sort_big.h"
 
-typedef int	t_bool;
-
-typedef struct s_list
-{
-	int				content;
-	int				index;
-	t_bool			dir;
-	int				tot_move;
-	struct s_list	*pos;
-	struct s_list	*prev;
-	struct s_list	*next;
-}	t_list;
+void	ft_find_pos(t_list *current_a, t_list *stack_b);
+t_list	*ft_find_max(t_list *stack_b);
+int		ft_countmove(t_list *current);
+int		ft_total_move(t_list *current);
 
 #endif

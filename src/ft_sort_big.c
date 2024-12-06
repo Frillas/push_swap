@@ -12,93 +12,57 @@
 
 #include "../header/ft_sort_big.h"
 
-t_list	ft_sort_big(t_list *stack_a, t_list *end, int len_a)
+t_list	*ft_sort_big(t_list *stack_a, int len_a)
 {
 	t_list	*stack_b;
-	t_list	*current;
-	int		size;
+	t_list	*extract;
 	int		len_b;
 
 	stack_b = NULL;
-	pos = NULL;
+	extract = NULL;
 	ft_pb(&stack_a, &stack_b);
 	ft_pb(&stack_a, &stack_b);
 	len_a = len_a - 2;
-	size = len_a - 3;
 	len_b = 2;
+	extract = ft_pick_one(stack_a, stack_b, len_a, len_b);
+	printf("%d\n", extract->content);
+	return (stack_a);
+}
+
+t_list	*ft_pick_one(t_list *stack_a, t_list *stack_b, int len_a, int len_b)
+{
+	t_list			*current;
+	t_list			*extract;
+	unsigned long	least_move;
+	unsigned long	move;
+
 	current = stack_a;
-	while (i < len_a)
-	{
-		ft_find_pos(current, stack_b);
-		current->dir = (current->index <= (len / 2));
-		current->pos->dir = (current->pos->index <= (len / 2));
-		current->tot_move = ft_countmove(current);
-		current->pos->tot_move = ft_countmove(current->pos);
-	}
-}
-
-void	ft_find_pos(t_list *current_a, t_list *stack_b)
-{
-	t_list	*current_b;
-
-	current_b = stack_b;
-	while (current_b != NULL)
-	{
-		if (current_a->content < current_b->content)
-		{
-			if (current_a->content > current_b->next->content)
-				current_a->pos = current_b->next;
-		}
-		current_b = current_b->next;
-	}
-	if (current_a->pos == NULL)
-		current_a->pos = ft_find_max(*stack_b);
-}
-
-t_list	ft_find_max(t_list *stack_b)
-{
-	t_list	*current;
-	t_list	pos;
-	int		max;
-
-	current = stack_b;
-	max = current->content;
+	extract = NULL;
+	least_move = (unsigned long)-1;
 	while (current != NULL)
 	{
-		if (current->content > max)
+		ft_update_move(current, stack_b, len_a, len_b);
+		if (current->dir && current->pos->dir)
+			move = ft_total_move(current);
+		else
+			move = current->tot_move + current->pos->tot_move + 1;
+		if (move < least_move)
 		{
-			max = current->content;
-			pos = current;
+			extract = current;
+			least_move = move;
+			if (move == 1)
+				break ;
 		}
 		current = current->next;
 	}
-	return (pos);
+	return (extract);
 }
 
-void	ft_countmove(t_list *current)
+void	ft_update_move(t_list *current, t_list *stack_b, int len_a, int len_b)
 {
-	int		i;
-
-	i = 0;
-	while (current != NULL)
-	{
-		if (current->dir)
-		{
-			while (current->prev != NULL)
-			{
-				i++;
-				current = current->prev;
-			}
-		}
-		else
-		{
-			while (current->next != NULL)
-			{
-				i++;
-				current = current->next;
-			}
-			i++;
-		}
-	}
-	return (i);
+	ft_find_pos(current, stack_b);
+	current->dir = (current->index <= (len_a / 2));
+	current->pos->dir = (current->pos->index <= (len_b / 2));
+	current->tot_move = ft_countmove(current);
+	current->pos->tot_move = ft_countmove(current->pos);
 }

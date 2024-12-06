@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_type.h                                          :+:      :+:    :+:   */
+/*   ft_sort_big.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 10:58:26 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 11:08:21 by aroullea         ###   ########.fr       */
+/*   Created: 2024/12/06 10:57:47 by aroullea          #+#    #+#             */
+/*   Updated: 2024/12/06 10:58:03 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TYPE_H
-# define FT_TYPE_H
+#ifndef FT_SORT_BIG_H
+# define FT_SORT_BIG_H
+# include "ft_build.h"
+# include "ft_type.h"
+# include "ft_instru_stack_a.h"
+# include "ft_instru_stack_b.h"
+# include "ft_sort_big_utils.h"
 
-# define TRUE 1
-# define FALSE 0
-
-typedef int	t_bool;
-
-typedef struct s_list
-{
-	int				content;
-	int				index;
-	t_bool			dir;
-	int				tot_move;
-	struct s_list	*pos;
-	struct s_list	*prev;
-	struct s_list	*next;
-}	t_list;
+t_list	*ft_sort_big(t_list *stack_a, int len_a);
+t_list	*ft_pick_one(t_list *stack_a, t_list *stack_b, int len_a, int len_b);
+void	ft_update_move(t_list *current, t_list *stack_b, int len_a, int len_b);
 
 #endif

@@ -26,3 +26,12 @@ void	update_index(t_list *head)
 		index++;
 	}
 }
+
+int	ft_minimum(int nb1, int nb2)
+{
+	if (nb1 < nb2)
+		return (nb1);
+	else if (nb1 > nb2)
+		return (nb2);
+	return (nb1);
+}
