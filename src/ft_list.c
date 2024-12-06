@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:56:35 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/02 11:47:21 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:10:31 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_list	*ft_create_list(t_list *head, int value, char **result)
 	}
 	ls_new->index = i;
 	ls_new->content = value;
+	ls_new->tot_move = 0;
+	ls_new->dir = -1;
+	ls_new->pos = NULL;
 	ls_new->prev = NULL;
 	ls_new->next = NULL;
 	i++;

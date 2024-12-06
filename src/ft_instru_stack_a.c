@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    ft_instru_stack_a.c                               :+:      :+:    :+:   */
+/*   ft_instru_stack_a.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:38:50 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/03 11:40:14 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:10:15 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_ra(t_list **head, t_list **end)
 	(*end)->next = *head;
 	*end = *head;
 	*head = current;
-	update_indexes(*head);
+	update_index(*head);
 	write(1, "ra\n", 3);
 }
 
@@ -64,7 +64,7 @@ void	ft_rra(t_list **head, t_list **end)
 	current->prev = *head;
 	(*head)->prev = NULL;
 	(*head)->next = current;
-	update_indexes(*head);
+	update_index(*head);
 	write(1, "rra\n", 4);
 }
 
@@ -91,7 +91,7 @@ void	ft_pb(t_list **stack_a, t_list **stack_b)
 		current_a->prev = NULL;
 	}
 	*stack_a = current_a;
-	update_indexes(*stack_a);
-	update_indexes(*stack_b);
+	update_index(*stack_a);
+	update_index(*stack_b);
 	write(1, "pb\n", 3);
 }

@@ -6,21 +6,23 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:01:38 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/02 11:48:09 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:06:08 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_utils_next.h"
 
-void	update_indexes(t_list *head)
+void	update_index(t_list *head)
 {
-    int     index = 0;
-    t_list  *current = head;
+	int		index;
+	t_list	*current;
 
-    while (current != NULL)
-    {
-        current->index = index;
-        current = current->next;
-        index++;
-    }
+	current = head;
+	index = 0;
+	while (current != NULL)
+	{
+		current->index = index;
+		current = current->next;
+		index++;
+	}
 }
