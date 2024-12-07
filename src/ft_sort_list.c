@@ -25,13 +25,13 @@ t_list	*ft_sort_three(t_list *head, t_list *end)
 	if (head->content > head->next->content)
 	{
 		if ((end->content < head->content) && (end->content > current->content))
-			ft_ra(&head, &end);
+			ft_ra(&head, &end, FALSE);
 		else
 			ft_sa(&head, &end);
 	}
 	if (head->next->content > end->content)
 	{
-		ft_rra(&head, &end);
+		ft_rra(&head, &end, FALSE);
 		if (head->content > head->next->content)
 			ft_sa(&head, &end);
 	}
@@ -88,12 +88,12 @@ void	putmin_ontop(t_list **stack_a, t_list **stack_b, t_list **end, int len)
 		if (min_pos <= (len / 2))
 		{
 			while ((min_pos--) > 0)
-				ft_ra(stack_a, end);
+				ft_ra(stack_a, end, FALSE);
 		}
 		else
 		{
 			while ((min_pos++) < len)
-				ft_rra(stack_a, end);
+				ft_rra(stack_a, end, FALSE);
 		}
 		ft_pb(stack_a, stack_b);
 		min_pos = ft_check_min(*stack_a);

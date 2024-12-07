@@ -12,27 +12,33 @@
 
 #include "../header/ft_sort_big_utils.h"
 
-void	ft_find_pos(t_list *current_a, t_list *stack_b)
+void	ft_find_pos(t_list *cur_a, t_list *stack_b)
 {
-	t_list	*current_b;
+	t_list	*cur_b;
 
-	current_b = stack_b;
-	while (current_b != NULL)
+	cur_b = stack_b;
+	while (cur_b != NULL)
 	{
-		if (current_a->content < current_b->content)
+		if (cur_a->content < cur_b->content)
 		{
-			if (current_a->content > current_b->next->content)
+			if (cur_b->next != NULL && cur_a->content > cur_b->next->content)
 			{
-				current_a->pos = current_b->next;
+				cur_a->pos = cur_b->next;
 				break ;
 			}
 		}
-		current_b = current_b->next;
-		if (current_b->next == NULL)
+		if (cur_b->next == NULL)
 			break ;
+		cur_b = cur_b->next;
 	}
-	if (current_a->pos == NULL)
-		current_a->pos = ft_find_max(stack_b);
+	if (cur_a->pos == NULL)
+	{
+		if (cur_a->content < cur_b->content
+			&& cur_a->content > stack_b->content)
+			cur_a->pos = stack_b;
+		else
+			cur_a->pos = ft_find_max(stack_b);
+	}
 }
 
 t_list	*ft_find_max(t_list *stack_b)

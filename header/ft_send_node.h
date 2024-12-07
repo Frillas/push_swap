@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_instru_stack_b.h                                :+:      :+:    :+:   */
+/*   ft_send_node.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 10:56:31 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 10:58:55 by aroullea         ###   ########.fr       */
+/*   Created: 2024/12/06 10:59:20 by aroullea          #+#    #+#             */
+/*   Updated: 2024/12/06 11:00:05 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INSTRU_STACK_B_H
-# define FT_INSTRU_STACK_B_H
+#ifndef FT_SEND_NODE_H
+# define FT_SEND_NODE_H
 
-# include "ft_sort_list.h"
+# include "ft_build.h"
+# include "ft_sort_big.h"
 
-void	ft_pa(t_list **stack_b, t_list **stack_a);
-void	ft_rr(t_list **s_a, t_list **s_b, t_list **end_a, t_list **end_b);
-void	ft_rrr(t_list **s_a, t_list **s_b, t_list **end_a, t_list **end_b);
-void	ft_rb(t_list **head, t_list **end);
-void	ft_rrb(t_list **head, t_list **end);
+void	ft_send_node(t_list **extract, t_list **end_a, t_list **end_b);
+void	ft_dir_true(t_list **extract, t_list **end_a, t_list **end_b);
+void	ft_dir_false(t_list **extract, t_list **end_a, t_list **end_b);
+void	ft_opposite_a(t_list **head, t_list **end);
+void	ft_opposite_b(t_list **head, t_list **end);
 
 #endif

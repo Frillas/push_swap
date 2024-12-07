@@ -17,8 +17,9 @@
 # include "ft_instru_stack_a.h"
 # include "ft_instru_stack_b.h"
 # include "ft_sort_big_utils.h"
+# include "ft_send_node.h"
 
-t_list	*ft_sort_big(t_list *stack_a, int len_a);
+t_list	*ft_sort_big(t_list *stack_a, t_list *end, int len_a);
 t_list	*ft_pick_one(t_list *stack_a, t_list *stack_b, int len_a, int len_b);
 void	ft_update_move(t_list *current, t_list *stack_b, int len_a, int len_b);
 

@@ -37,7 +37,7 @@ void	ft_sa(t_list **head, t_list **end)
 	write(1, "sa\n", 3);
 }
 
-void	ft_ra(t_list **head, t_list **end)
+void	ft_ra(t_list **head, t_list **end, t_bool check)
 {
 	t_list	*current;
 
@@ -49,10 +49,11 @@ void	ft_ra(t_list **head, t_list **end)
 	*end = *head;
 	*head = current;
 	update_index(*head);
-	write(1, "ra\n", 3);
+	if (check == FALSE)
+		write(1, "ra\n", 3);
 }
 
-void	ft_rra(t_list **head, t_list **end)
+void	ft_rra(t_list **head, t_list **end, t_bool check)
 {
 	t_list	*current;
 
@@ -65,7 +66,8 @@ void	ft_rra(t_list **head, t_list **end)
 	(*head)->prev = NULL;
 	(*head)->next = current;
 	update_index(*head);
-	write(1, "rra\n", 4);
+	if (check == FALSE)
+		write(1, "rra\n", 4);
 }
 
 void	ft_pb(t_list **stack_a, t_list **stack_b)
