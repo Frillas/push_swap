@@ -67,11 +67,16 @@ void	ft_dir_false(t_list **extract, t_list **end_a, t_list **end_b)
 
 void	ft_opposite_a(t_list **head, t_list **end)
 {
+	t_list	*current;
+
+	current = *head;
+	while (current->prev != NULL)
+		current = current->prev;
 	if ((*head)->dir == TRUE)
 	{
 		while ((*head)->tot_move > 0)
 		{
-			ft_ra(head, end, FALSE);
+			ft_ra(&current, end, FALSE);
 			(*head)->tot_move--;
 		}
 	}
@@ -79,7 +84,7 @@ void	ft_opposite_a(t_list **head, t_list **end)
 	{
 		while ((*head)->tot_move > 0)
 		{
-			ft_rra(head, end, FALSE);
+			ft_rra(&current, end, FALSE);
 			(*head)->tot_move--;
 		}
 	}
@@ -87,11 +92,16 @@ void	ft_opposite_a(t_list **head, t_list **end)
 
 void	ft_opposite_b(t_list **head, t_list **end)
 {
+	t_list	*current;
+
+	current = *head;
+	while (current->prev != NULL)
+		current = current->prev;
 	if ((*head)->dir == TRUE)
 	{
 		while ((*head)->tot_move > 0)
 		{
-			ft_rb(head, end);
+			ft_rb(&current, end);
 			(*head)->tot_move--;
 		}
 	}
@@ -99,7 +109,7 @@ void	ft_opposite_b(t_list **head, t_list **end)
 	{
 		while ((*head)->tot_move > 0)
 		{
-			ft_rrb(head, end);
+			ft_rrb(&current, end);
 			(*head)->tot_move--;
 		}
 	}

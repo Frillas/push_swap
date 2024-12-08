@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_big.h                                      :+:      :+:    :+:   */
+/*   ft_push_back.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 10:57:47 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 10:58:03 by aroullea         ###   ########.fr       */
+/*   Created: 2024/12/03 11:40:52 by aroullea          #+#    #+#             */
+/*   Updated: 2024/12/06 11:13:24 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef FT_PUSH_BACK_H
+# define FT_PUSH_BACK_H
 
-#ifndef FT_SORT_BIG_H
-# define FT_SORT_BIG_H
 # include "ft_build.h"
-# include "ft_type.h"
-# include "ft_instru_stack_a.h"
-# include "ft_instru_stack_b.h"
-# include "ft_sort_big_utils.h"
-# include "ft_send_node.h"
-# include "ft_push_back.h"
+# include "ft_sort_big.h"
 
-t_list	*ft_sort_big(t_list *stack_a, t_list *end, int len_a);
-t_list	*ft_pick_one(t_list *stack_a, t_list *stack_b, int len_a, int len_b);
-void	ft_update_move(t_list *current, t_list *stack_b, int len_a, int len_b);
+void	ft_push_back(t_list **stack_a, t_list **stack_b, int len_a, int len_b);
+void	ft_search_pos(t_list **end_a, t_list **cur_b);
+t_bool	ft_min_max(t_list **current_a, t_list **current_b, t_list **min);
+void	ft_pos_ontop(t_list **stack_a, t_list **current_b, t_list **end_a, int len_a);
+t_list	*ft_finish(t_list **stack_a, t_list **end_a, t_list **min, int len_a);
 
 #endif
