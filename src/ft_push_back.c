@@ -26,7 +26,7 @@ void	ft_push_back(t_list **stack_a, t_list **stack_b, int len_a, int len_b)
 	current_a = (*stack_a);
 	current_b = (*stack_b);
 	current_b->pos = NULL;
-	while (len_b > 0) 
+	while (len_b > 0)
 	{
 		if (current_b->content < min->content)
 		{
@@ -43,7 +43,6 @@ void	ft_push_back(t_list **stack_a, t_list **stack_b, int len_a, int len_b)
 				min = *stack_a;
 			}
 		}
-	
 		else if (current_b->content > max->content)
 		{
 			if (!(ft_min_max(&current_a, &current_b, &min)))
@@ -59,21 +58,21 @@ void	ft_push_back(t_list **stack_a, t_list **stack_b, int len_a, int len_b)
 				max = *stack_a;
 			}
 		}
-		else if ((current_b->content < current_a->content) 
+		else if ((current_b->content < current_a->content)
 			&& (current_b->content > end_a->content))
 			ft_pa(&current_b, stack_a);
 		else
-		{	
+		{
 			ft_search_pos(&end_a, &current_b);
 			ft_pos_ontop(stack_a, &current_b, &end_a, len_a);
 			ft_pa(&current_b, stack_a);
 		}
-	(*stack_b) = current_b;
-	current_a = (*stack_a);
-	if (current_b != NULL)
-		current_b->pos = NULL;
-	len_b--;
-	len_a++;
+		(*stack_b) = current_b;
+		current_a = (*stack_a);
+		if (current_b != NULL)
+			current_b->pos = NULL;
+		len_b--;
+		len_a++;
 	}
 	*stack_a = ft_finish(stack_a, &end_a, &min, len_a);
 }
@@ -90,19 +89,20 @@ void	ft_search_pos(t_list **end_a, t_list **cur_b)
 			if (search->prev != NULL && (*cur_b)->content > search->prev->content)
 			{
 				(*cur_b)->pos = search;
-				break;
+				break ;
 			}
 		}
 		search = search->prev;
 	}
 }
+
 t_bool	ft_min_max(t_list **current_a, t_list **current_b, t_list **min)
 {
 	t_bool	check_pa;
 
 	check_pa = FALSE;
-	if ((*min)->content == (*current_a)->content) 
-	{	
+	if ((*min)->content == (*current_a)->content)
+	{
 		ft_pa(current_b, current_a);
 		check_pa = TRUE;
 	}
@@ -110,32 +110,33 @@ t_bool	ft_min_max(t_list **current_a, t_list **current_b, t_list **min)
 		(*current_b)->pos = *min;
 	return (check_pa);
 }
-void	ft_pos_ontop(t_list **stack_a, t_list **current_b, t_list **end_a, int len_a)
+
+void	ft_pos_ontop(t_list **stack_a, t_list **cur_b, t_list **end, int len)
 {
-	(*current_b)->pos->dir = ((*current_b)->pos->index <= (len_a / 2));
-	(*current_b)->pos->tot_move = ft_countmove((*current_b)->pos);
-	if ((*current_b)->pos->dir == TRUE)
+	(*cur_b)->pos->dir = ((*cur_b)->pos->index <= (len / 2));
+	(*cur_b)->pos->tot_move = ft_countmove((*cur_b)->pos);
+	if ((*cur_b)->pos->dir == TRUE)
 	{
-		while ((*current_b)->pos->tot_move > 0)
-		{	
-			ft_ra(stack_a, end_a, FALSE);
-			(*current_b)->pos->tot_move--;
+		while ((*cur_b)->pos->tot_move > 0)
+		{
+			ft_ra(stack_a, end, FALSE);
+			(*cur_b)->pos->tot_move--;
 		}
 	}
 	else
 	{
-		while ((*current_b)->pos->tot_move > 0)
-		{	
-			ft_rra(stack_a, end_a, FALSE);
-			(*current_b)->pos->tot_move--;
-		}	
+		while ((*cur_b)->pos->tot_move > 0)
+		{
+			ft_rra(stack_a, end, FALSE);
+			(*cur_b)->pos->tot_move--;
+		}
 	}
 }
 
 t_list	*ft_finish(t_list **stack_a, t_list **end_a, t_list **min, int len_a)
 {
 	t_list	*current;
-	
+
 	current = *min;
 	current->dir = current->index <= (len_a / 2);
 	current->tot_move = ft_countmove(current);
@@ -147,7 +148,7 @@ t_list	*ft_finish(t_list **stack_a, t_list **end_a, t_list **min, int len_a)
 			current->tot_move--;
 		}
 	}
-	else 
+	else
 	{
 		while (current->tot_move > 0)
 		{

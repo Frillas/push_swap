@@ -42,7 +42,7 @@ void	ft_ra(t_list **head, t_list **end, t_bool check)
 	t_list	*current;
 
 	while ((*head)->prev != NULL)
-		(*head)= (*head)->prev;
+		(*head) = (*head)->prev;
 	current = (*head)->next;
 	(*head)->prev = *end;
 	(*head)->next = NULL;
@@ -60,7 +60,7 @@ void	ft_rra(t_list **head, t_list **end, t_bool check)
 	t_list	*current;
 
 	while ((*head)->prev != NULL)
-		(*head)= (*head)->prev;
+		(*head) = (*head)->prev;
 	current = *head;
 	(*end)->next = *head;
 	(*end) = (*end)->prev;
