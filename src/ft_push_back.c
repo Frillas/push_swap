@@ -17,120 +17,59 @@ void	ft_push_back(t_list **stack_a, t_list **stack_b, int len_a, int len_b)
 	t_list	*min;
 	t_list	*max;
 	t_list	*end_a;
-	t_list	*current_a;
-	t_list	*current_b;
+	t_list	*current;
 
 	min = *stack_a;
 	max = (*stack_a)->next->next;
 	end_a = max;
-	current_a = (*stack_a);
-	current_b = (*stack_b);
-	current_b->pos = NULL;
+	current = (*stack_b);
 	while (len_b > 0)
 	{
-		if (current_b->content < min->content)
+		if (is_outside_range(current->content, min->content, max->content))
 		{
-			if (!(ft_min_max(&current_a, &current_b, &min)))
-			{
-				ft_pos_ontop(stack_a, &current_b, &end_a, len_a);
-				ft_pa(&current_b, stack_a);
-				min = *stack_a;
-			}
-			else
-			{
-				*stack_a = current_a;
-				*stack_b = current_b;
-				min = *stack_a;
-			}
+			end_a = handle_ext(stack_a, stack_b, &min, &max);
+			current = *stack_b;
 		}
-		else if (current_b->content > max->content)
-		{
-			if (!(ft_min_max(&current_a, &current_b, &min)))
-			{
-				ft_pos_ontop(stack_a, &current_b, &end_a, len_a);
-				ft_pa(&current_b, stack_a);
-				max = *stack_a;
-			}
-			else
-			{
-				*stack_a = current_a;
-				*stack_b = current_b;
-				max = *stack_a;
-			}
-		}
-		else if ((current_b->content < current_a->content)
-			&& (current_b->content > end_a->content))
-			ft_pa(&current_b, stack_a);
+		else if (between(current->content, (*stack_a)->content, end_a->content))
+			ft_pa(&current, stack_a);
 		else
-		{
-			ft_search_pos(&end_a, &current_b);
-			ft_pos_ontop(stack_a, &current_b, &end_a, len_a);
-			ft_pa(&current_b, stack_a);
-		}
-		(*stack_b) = current_b;
-		current_a = (*stack_a);
-		if (current_b != NULL)
-			current_b->pos = NULL;
+			default_case(stack_a, &current, &end_a, len_a);
+		(*stack_b) = current;
 		len_b--;
 		len_a++;
 	}
 	*stack_a = ft_finish(stack_a, &end_a, &min, len_a);
 }
 
-void	ft_search_pos(t_list **end_a, t_list **cur_b)
+t_list	*handle_ext(t_list **sta_a, t_list **sta_b, t_list **min, t_list **max)
 {
-	t_list	*search;
+	t_list	*end_a;
+	int		len_a;
 
-	search = *end_a;
-	while (search != NULL)
+	len_a = 1;
+	end_a = *sta_a;
+	while (end_a->next != NULL)
 	{
-		if ((*cur_b)->content < search->content)
-		{
-			if (search->prev != NULL && (*cur_b)->content > search->prev->content)
-			{
-				(*cur_b)->pos = search;
-				break ;
-			}
-		}
-		search = search->prev;
+		end_a = end_a->next;
+		len_a++;
 	}
+	if (!(ft_is_min_top(sta_a, sta_b, min)))
+	{
+		ft_pos_ontop(sta_a, sta_b, &end_a, len_a);
+		ft_pa(sta_b, sta_a);
+	}
+	if ((*sta_a)->content < (*min)->content)
+		*min = *sta_a;
+	else if ((*sta_a)->content > (*max)->content)
+		*max = *sta_a;
+	return (end_a);
 }
 
-t_bool	ft_min_max(t_list **current_a, t_list **current_b, t_list **min)
+void	default_case(t_list **sta_a, t_list **sta_b, t_list **end_a, int len_a)
 {
-	t_bool	check_pa;
-
-	check_pa = FALSE;
-	if ((*min)->content == (*current_a)->content)
-	{
-		ft_pa(current_b, current_a);
-		check_pa = TRUE;
-	}
-	else
-		(*current_b)->pos = *min;
-	return (check_pa);
-}
-
-void	ft_pos_ontop(t_list **stack_a, t_list **cur_b, t_list **end, int len)
-{
-	(*cur_b)->pos->dir = ((*cur_b)->pos->index <= (len / 2));
-	(*cur_b)->pos->tot_move = ft_countmove((*cur_b)->pos);
-	if ((*cur_b)->pos->dir == TRUE)
-	{
-		while ((*cur_b)->pos->tot_move > 0)
-		{
-			ft_ra(stack_a, end, FALSE);
-			(*cur_b)->pos->tot_move--;
-		}
-	}
-	else
-	{
-		while ((*cur_b)->pos->tot_move > 0)
-		{
-			ft_rra(stack_a, end, FALSE);
-			(*cur_b)->pos->tot_move--;
-		}
-	}
+	ft_search_pos(end_a, sta_b);
+	ft_pos_ontop(sta_a, sta_b, end_a, len_a);
+	ft_pa(sta_b, sta_a);
 }
 
 t_list	*ft_finish(t_list **stack_a, t_list **end_a, t_list **min, int len_a)
