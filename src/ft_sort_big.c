@@ -38,7 +38,6 @@ t_list	*ft_sort_big(t_list *stack_a, t_list *end_a, int len_a)
 	}
 	stack_a = ft_sort_three(stack_a, end_a);
 	ft_push_back(&stack_a, &stack_b, len_a, len_b);
-	ft_print_list(stack_b);
 	return (stack_a);
 }
 

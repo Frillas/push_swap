@@ -27,6 +27,11 @@ void	ft_send_node(t_list **extract, t_list **end_a, t_list **end_b)
 
 void	ft_dir_true(t_list **extract, t_list **end_a, t_list **end_b)
 {
+	t_list	*head;
+
+	head = *extract;
+	while (head->prev != NULL)
+		head = head->prev;
 	while (((*extract)->tot_move > 0) && ((*extract)->pos->tot_move > 0))
 	{
 		ft_rr(extract, &((*extract)->pos), end_a, end_b);
@@ -35,7 +40,7 @@ void	ft_dir_true(t_list **extract, t_list **end_a, t_list **end_b)
 	}
 	while ((*extract)->tot_move > 0)
 	{
-		ft_ra(extract, end_a, FALSE);
+		ft_ra(&head, end_a, FALSE);
 		(*extract)->tot_move--;
 	}
 	while ((*extract)->pos->tot_move > 0)
@@ -47,6 +52,11 @@ void	ft_dir_true(t_list **extract, t_list **end_a, t_list **end_b)
 
 void	ft_dir_false(t_list **extract, t_list **end_a, t_list **end_b)
 {
+	t_list	*head;
+
+	head = *extract;
+	while (head->prev != NULL)
+		head = head->prev;
 	while (((*extract)->tot_move > 0) && ((*extract)->pos->tot_move > 0))
 	{
 		ft_rrr(extract, &((*extract)->pos), end_a, end_b);
@@ -55,7 +65,7 @@ void	ft_dir_false(t_list **extract, t_list **end_a, t_list **end_b)
 	}
 	while ((*extract)->tot_move > 0)
 	{
-		ft_rra(extract, end_a, FALSE);
+		ft_rra(&head, end_a, FALSE);
 		(*extract)->tot_move--;
 	}
 	while ((*extract)->pos->tot_move > 0)
