@@ -12,11 +12,6 @@
 
 #include "../header/ft_build.h"
 
-void	std_error(void)
-{
-	write(2, "Error\n", 6);
-}
-
 t_list	*ft_build_list(char **result, t_list *head, t_list **end)
 {
 	int			i;
@@ -30,8 +25,7 @@ t_list	*ft_build_list(char **result, t_list *head, t_list **end)
 		res = ft_atoi_valid(result[i], &value);
 		if (!res || ((value > 2147483647) || (value < -2147483648)))
 		{
-			std_error();
-			ft_free(result, head);
+			std_error(result, head);
 			return (NULL);
 		}
 		head = ft_add_to_list(&head, end, value, result);
@@ -53,11 +47,14 @@ t_list	*ft_parsing(int argc, char **argv, t_list **end)
 	head = NULL;
 	while (i < argc)
 	{
+		if (is_empty(argv[i]))
+		{
+			std_error(NULL, head);
+			return (NULL);
+		}
 		result = ft_split(argv[i], ' ');
 		if (result == NULL)
 			return (NULL);
-		else if (result[0] == NULL)
-			ft_free(result, NULL);
 		else
 		{
 			head = ft_build_list(result, head, end);

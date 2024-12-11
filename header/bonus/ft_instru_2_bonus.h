@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils_next.h                                    :+:      :+:    :+:   */
+/*    ft_instru_2_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 10:59:20 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 11:00:05 by aroullea         ###   ########.fr       */
+/*   Created: 2024/11/08 15:23:55 by aroullea          #+#    #+#             */
+/*   Updated: 2024/11/15 16:17:16 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_NEXT_H
-# define FT_UTILS_NEXT_H
+#ifndef FT_INSTRU_2_BONUS_H
+# define FT_INSTRU_2_BONUS_H
+# include "ft_checker_bonus.h"
 
-# include "ft_list.h"
-
-void	std_error(char **result, t_list *head);
-void	update_index(t_list *head);
-int		ft_minimum(int nb1, int nb2);
-t_bool	is_empty(char *str);
+void	reverse(t_list **head);
+void	reverse_rrr(t_list **stack_a, t_list**stack_b);
+void	rotate_rr(t_list **stack_a, t_list **stack_b);
 
 #endif

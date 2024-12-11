@@ -12,6 +12,12 @@
 
 #include "../header/ft_utils_next.h"
 
+void	std_error(char **result, t_list *head)
+{
+	write(2, "Error\n", 6);
+	ft_free(result, head);
+}
+
 void	update_index(t_list *head)
 {
 	int		index;
@@ -34,4 +40,15 @@ int	ft_minimum(int nb1, int nb2)
 	else if (nb1 > nb2)
 		return (nb2);
 	return (nb1);
+}
+
+t_bool	is_empty(char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ')
+			return (FALSE);
+		str++;
+	}
+	return (TRUE);
 }

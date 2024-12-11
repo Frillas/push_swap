@@ -70,7 +70,7 @@ static char	**ft_sort(char const *s, char **str, char c, int words)
 		str[k] = (char *) ft_calloc((len + 1), (sizeof(char)));
 		if (str[k] == NULL)
 		{
-			while (k > 0)
+			while (k >= 0)
 				free (str[k--]);
 			free (str);
 			return (NULL);

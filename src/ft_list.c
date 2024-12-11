@@ -21,7 +21,6 @@ t_list	*ft_create_list(t_list *head, int value, char **result)
 	ls_new = (t_list *) malloc (sizeof(t_list));
 	if (ls_new == NULL)
 	{
-		std_error();
 		ft_free(result, head);
 		return (NULL);
 	}
@@ -74,23 +73,6 @@ t_bool	ft_check_value(t_list *head, int value, char **result)
 		current = current->next;
 	}
 	if (res == FALSE)
-	{
-		std_error();
-		ft_free(result, head);
-	}
+		std_error(result, head);
 	return (res);
-}
-
-void	ft_print_list(t_list *head)
-{
-	t_list	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		head = head->next;
-		printf("Value: %d, Index: %d\n", current->content, current->index);
-		current = head;
-	}
-	printf("\n");
 }

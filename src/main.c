@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:56:35 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/10 10:21:27 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:37:28 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char **argv)
 				head = ft_sort_five(head, end, len);
 			else if (!sort_numb)
 				head = ft_sort_big(head, end, len);
-			ft_print_list(head);
 		}
 	}
 	ft_free(NULL, head);
