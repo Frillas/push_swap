@@ -15,16 +15,29 @@
 void	swap(t_list **head)
 {
 	t_list	*current;
+	t_list	*end;
 
-	if (!head || !*head)
+	if (!head || !*head || (*head)->next == NULL)
 		return ;
+	end = find_end(*head);
 	current = (*head)->next;
-	(*head)->prev = current;
-	(*head)->next = current->next;
-	current->next->prev = *head;
-	current->prev = NULL;
-	current->next = *head;
-	(*head) = current;
+	if (current != end)
+	{
+		(*head)->prev = current;
+		(*head)->next = end;
+		current->prev = NULL;
+		current->next = *head;
+		end->prev = *head;
+		(*head) = current;
+	}
+	else
+	{
+		(*head)->prev = end;
+		(*head)->next = NULL;
+		end->prev = NULL;
+		end->next = *head;
+		(*head) = end;
+	}
 }
 
 void	swap_ss(t_list **stack_a, t_list **stack_b)
@@ -51,7 +64,8 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 	else if (current_b == NULL)
 	{
 		(*stack_b)->next = *stack_a;
-		(*stack_a)->prev = *stack_b;
+		if (*stack_a)
+			(*stack_a)->prev = *stack_b;
 		*stack_a = *stack_b;
 		*stack_b = NULL;
 	}
@@ -70,7 +84,8 @@ void	push_b(t_list **stack_a, t_list **stack_b)
 		*stack_b = *stack_a;
 		(*stack_b)->next = NULL;
 		(*stack_b)->prev = NULL;
-		current_a->prev = NULL;
+		if (current_a)
+			current_a->prev = NULL;
 	}
 	else
 	{
@@ -91,9 +106,7 @@ void	rotate(t_list **head)
 
 	if (!head || !*head || !(*head)->next)
 		return ;
-	end = *head;
-	while (end->next != NULL)
-		end = end->next;
+	end = find_end(*head);
 	current = *head;
 	*head = (*head)->next;
 	(*head)->prev = NULL;

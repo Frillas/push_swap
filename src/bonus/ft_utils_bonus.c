@@ -29,6 +29,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 t_bool	ft_check_sort(t_list *head)
 {
+	if (head == NULL)
+		return (1);
 	while (head->next != NULL)
 	{
 		if (head->content > head->next->content)
@@ -36,4 +38,11 @@ t_bool	ft_check_sort(t_list *head)
 		head = head->next;
 	}
 	return (0);
+}
+
+t_list	*find_end(t_list *head)
+{
+	while (head->next != NULL)
+		head = head->next;
+	return (head);
 }

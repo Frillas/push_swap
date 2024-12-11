@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/bonus/get_next_line.h"
+#include "../../header/bonus/get_next_line_bonus.h"
 
 char	*ft_add_line(char *rem)
 {

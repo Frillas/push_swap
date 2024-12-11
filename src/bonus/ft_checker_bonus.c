@@ -65,7 +65,7 @@ int	ft_check_str(char *str)
 	return (FALSE);
 }
 
-void	ft_get_stdin(t_list **stack_a, t_list **stack_b)
+t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b)
 {
 	char	*str;
 
@@ -73,20 +73,21 @@ void	ft_get_stdin(t_list **stack_a, t_list **stack_b)
 	while (1)
 	{
 		str = get_next_line(0);
-		if ((str == NULL) || str[0] == '\n')
+		if ((str == NULL))
 		{
 			free(str);
-			break ;
+			return (TRUE);
 		}
-		if (!ft_check_str(str))
+		if (!ft_check_str(str) || (str[0] == '\n'))
 		{
 			free(str);
 			write (2, "Error\n", 6);
-			break ;
+			return (FALSE);
 		}
 		ft_instru(stack_a, stack_b, str);
 		free(str);
 	}
+	return (TRUE);
 }
 
 int	main(int argc, char **argv)
@@ -94,10 +95,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	t_list	*end;
-	t_bool	sort_numb;
-	t_list	*start;
 
-	sort_numb = TRUE;
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc >= 2)
@@ -105,26 +103,13 @@ int	main(int argc, char **argv)
 		stack_a = ft_parsing(argc, argv, &end);
 		if (stack_a != NULL)
 		{
-			ft_count_list(stack_a, &sort_numb);
-			if (!sort_numb)
-			{
-				ft_get_stdin(&stack_a, &stack_b);
-				if (!ft_check_sort(stack_a) && (stack_b == NULL))
-					write(1, "OK\n", 3);
-				else
-					write(1, "KO\n", 3);
-			}
-			else
+			ft_get_stdin(&stack_a, &stack_b);
+			if (!ft_check_sort(stack_a) && (stack_b == NULL))
 				write(1, "OK\n", 3);
+			else
+				write(1, "KO\n", 3);
 		}
 	}
-	start = stack_a;
-	while (start != NULL)
-	{
-		printf("%d ", start->content);
-		start = start->next;
-	}
-	printf("\n");
 	ft_free(NULL, stack_a);
 	ft_free(NULL, stack_b);
 }

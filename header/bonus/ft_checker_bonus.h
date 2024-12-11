@@ -12,15 +12,14 @@
 
 #ifndef FT_CHECKER_BONUS_H
 # define FT_CHECKER_BONUS_H
-# include <stdio.h>
 # include "../ft_build.h"
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 # include "ft_instru_1_bonus.h"
 # include "ft_instru_2_bonus.h"
 # include "ft_utils_bonus.h"
 
 void	ft_instru(t_list **stack_a, t_list **stack_b, char *str);
 int		ft_check_str(char *str);
-void	ft_get_stdin(t_list **stack_a, t_list **stack_b);
+t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b);
 
 #endif

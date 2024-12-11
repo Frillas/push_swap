@@ -16,5 +16,6 @@
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 t_bool	ft_check_sort(t_list *head);
+t_list	*find_end(t_list *head);
 
 #endif
