@@ -103,11 +103,13 @@ int	main(int argc, char **argv)
 		stack_a = ft_parsing(argc, argv, &end);
 		if (stack_a != NULL)
 		{
-			ft_get_stdin(&stack_a, &stack_b);
-			if (!ft_check_sort(stack_a) && (stack_b == NULL))
-				write(1, "OK\n", 3);
-			else
-				write(1, "KO\n", 3);
+			if (ft_get_stdin(&stack_a, &stack_b))
+			{
+				if (!ft_check_sort(stack_a) && (stack_b == NULL))
+					write(1, "OK\n", 3);
+				else
+					write(1, "KO\n", 3);
+			}
 		}
 	}
 	ft_free(NULL, stack_a);
