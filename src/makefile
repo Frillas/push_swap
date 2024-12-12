@@ -6,15 +6,14 @@ CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -f
 
 OBJ_DIR = ../obj
-BONUS_DIR = ../obj/bonus
 
 SRC = ft_build.c ft_instru_stack_a.c ft_instru_stack_b.c ft_list.c ft_push_back.c \
       ft_push_back_utilis.c ft_send_node.c ft_sort_big.c ft_sort_big_utils.c ft_sort_list.c \
       ft_split.c ft_utils.c ft_utils_next.c main.c
 
 BONUS = ./bonus/ft_checker_bonus.c ./bonus/ft_instru_1_bonus.c ./bonus/ft_instru_2_bonus.c \
-        ./bonus/ft_utils_bonus.c ./bonus/get_next_line/get_next_line.c \
-        ./bonus/get_next_line/get_next_line_utils.c ft_build.c ft_list.c ft_split.c \
+        ./bonus/ft_utils_bonus.c ./bonus/get_next_line/get_next_line_bonus.c \
+        ./bonus/get_next_line/get_next_line_utils_bonus.c ft_build.c ft_list.c ft_split.c \
         ft_utils.c ft_utils_next.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
