@@ -2,13 +2,13 @@ NAME = push_swap
 BONUS_NAME = checker
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 OBJ_DIR = ../obj
 
 SRC = ft_build.c ft_instru_stack_a.c ft_instru_stack_b.c ft_list.c ft_push_back.c \
-      ft_push_back_utilis.c ft_send_node.c ft_sort_big.c ft_sort_big_utils.c ft_sort_list.c \
+      ft_push_back_utils.c ft_send_node.c ft_sort_big.c ft_sort_big_utils.c ft_sort_list.c \
       ft_split.c ft_utils.c ft_utils_next.c main.c
 
 BONUS = ./bonus/ft_checker_bonus.c ./bonus/ft_instru_1_bonus.c ./bonus/ft_instru_2_bonus.c \

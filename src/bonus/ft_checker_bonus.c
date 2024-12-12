@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:23:55 by aroullea          #+#    #+#             */
-/*   Updated: 2024/11/15 16:17:16 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:48:00 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b)
 	while (1)
 	{
 		str = get_next_line(0);
-		if ((str == NULL))
+		if (str == NULL)
 		{
 			free(str);
 			return (TRUE);

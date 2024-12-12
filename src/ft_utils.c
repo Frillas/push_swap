@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:01:38 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/02 11:48:09 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:53:07 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
-t_bool	ft_atoi_valid(const char *s, long int *value)
+t_bool	ft_atoi_valid(const char *s, long int *value, t_bool res)
 {
 	int		i;
 	int		sign;
-	t_bool	res;
 
 	i = 0;
 	sign = 1;
@@ -64,12 +63,13 @@ t_bool	ft_atoi_valid(const char *s, long int *value)
 	{
 		res = TRUE;
 		*value = (*value * 10) + (s[i++] - '0');
+		if (*value < 0)
+			return (FALSE);
 	}
 	*value = *value * sign;
 	if ((res == TRUE) && (s[i] == '\0'))
 		return (TRUE);
-	else
-		return (FALSE);
+	return (FALSE);
 }
 
 void	ft_free(char **result, t_list *head)

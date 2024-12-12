@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 16:04:54 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/06 11:10:05 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:51:50 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ t_list	*ft_build_list(char **result, t_list *head, t_list **end)
 	t_bool		res;
 
 	i = 0;
+	res = FALSE;
 	while (result[i] != NULL)
 	{
 		value = 0;
-		res = ft_atoi_valid(result[i], &value);
+		res = ft_atoi_valid(result[i], &value, res);
 		if (!res || ((value > 2147483647) || (value < -2147483648)))
 		{
 			std_error(result, head);
