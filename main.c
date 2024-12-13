@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_build.h"
+#include "./header/ft_build.h"
 
 int	main(int argc, char **argv)
 {
