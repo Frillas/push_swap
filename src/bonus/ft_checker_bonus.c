@@ -74,10 +74,7 @@ t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b)
 	{
 		str = get_next_line(0);
 		if (str == NULL)
-		{
-			free(str);
 			return (TRUE);
-		}
 		if (!ft_check_str(str) || (str[0] == '\n'))
 		{
 			free(str);
