@@ -6,7 +6,7 @@
 /*   By: aroullea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:23:55 by aroullea          #+#    #+#             */
-/*   Updated: 2024/12/12 14:12:34 by aroullea         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:44:48 by aroullea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	swap(t_list **head)
 	if (current != end)
 	{
 		(*head)->prev = current;
-		(*head)->next = end;
+		(*head)->next = current->next;
 		current->prev = NULL;
+		current->next->prev = *head;
 		current->next = *head;
-		end->prev = *head;
 		(*head) = current;
 	}
 	else
