@@ -14,76 +14,86 @@
 
 void	ft_instru(t_list **stack_a, t_list **stack_b, char *str)
 {
-	if (!ft_strncmp(str, "sa\n", 4))
+	if (!ft_strncmp(str, "sa", 3))
 		swap(stack_a);
-	else if (!ft_strncmp(str, "sb\n", 4))
+	else if (!ft_strncmp(str, "sb", 3))
 		swap(stack_b);
-	else if (!ft_strncmp(str, "ss\n", 4))
+	else if (!ft_strncmp(str, "ss", 3))
 		swap_ss(stack_a, stack_b);
-	else if (!ft_strncmp(str, "pa\n", 4))
+	else if (!ft_strncmp(str, "pa", 3))
 		push_a(stack_a, stack_b);
-	else if (!ft_strncmp(str, "pb\n", 4))
+	else if (!ft_strncmp(str, "pb", 3))
 		push_b(stack_a, stack_b);
-	else if (!ft_strncmp(str, "ra\n", 4))
+	else if (!ft_strncmp(str, "ra", 3))
 		rotate(stack_a);
-	else if (!ft_strncmp(str, "rb\n", 4))
+	else if (!ft_strncmp(str, "rb", 3))
 		rotate(stack_b);
-	else if (!ft_strncmp(str, "rr\n", 4))
+	else if (!ft_strncmp(str, "rr", 3))
 		rotate_rr(stack_a, stack_b);
-	else if (!ft_strncmp(str, "rra\n", 5))
+	else if (!ft_strncmp(str, "rra", 4))
 		reverse(stack_a);
-	else if (!ft_strncmp(str, "rrb\n", 5))
+	else if (!ft_strncmp(str, "rrb", 4))
 		reverse(stack_b);
-	else if (!ft_strncmp(str, "rrr\n", 5))
+	else if (!ft_strncmp(str, "rrr", 4))
 		reverse_rrr(stack_a, stack_b);
 }
 
-int	ft_check_str(char *str)
+t_bool	execute_instructions(t_list **stack_a, t_list **stack_b, char *inst)
 {
-	if (!ft_strncmp(str, "sa\n", 4))
+	char	**ptr_inst;
+	int		i;
+
+	i = 0;
+	if (inst == NULL)
 		return (TRUE);
-	else if (!ft_strncmp(str, "sb\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "ss\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "pa\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "pb\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "ra\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "rb\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "rr\n", 4))
-		return (TRUE);
-	else if (!ft_strncmp(str, "rra\n", 5))
-		return (TRUE);
-	else if (!ft_strncmp(str, "rrb\n", 5))
-		return (TRUE);
-	else if (!ft_strncmp(str, "rrr\n", 5))
-		return (TRUE);
-	return (FALSE);
+	ptr_inst = ft_split(inst, '\n');
+	free(inst);
+	if (ptr_inst == NULL)
+		return (FALSE);
+	while (ptr_inst[i])
+	{
+		ft_instru(stack_a, stack_b, ptr_inst[i]);
+		free(ptr_inst[i]);
+		i++;
+	}
+	free(ptr_inst);
+	return (TRUE);
 }
 
-t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b)
+t_bool	collect_instructions(char **inst)
 {
 	char	*str;
 
+	*inst = NULL;
 	str = NULL;
 	while (1)
 	{
 		str = get_next_line(0);
 		if (str == NULL)
-			return (TRUE);
+			break ;
 		if (!ft_check_str(str) || (str[0] == '\n'))
 		{
+			free(*inst);
 			free(str);
 			write (2, "Error\n", 6);
 			return (FALSE);
 		}
-		ft_instru(stack_a, stack_b, str);
+		*inst = ft_strjoin(*inst, str, ft_strlen(*inst), ft_strlen(str));
 		free(str);
+		if (*inst == NULL)
+			return (FALSE);
 	}
+	return (TRUE);
+}
+
+t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b)
+{
+	char	*inst;
+
+	if (!collect_instructions(&inst))
+		return (FALSE);
+	if (!execute_instructions(stack_a, stack_b, inst))
+		return (FALSE);
 	return (TRUE);
 }
 

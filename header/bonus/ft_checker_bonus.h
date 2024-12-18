@@ -19,7 +19,8 @@
 # include "ft_utils_bonus.h"
 
 void	ft_instru(t_list **stack_a, t_list **stack_b, char *str);
-int		ft_check_str(char *str);
+t_bool	execute_instructions(t_list **stack_a, t_list **stack_b, char *inst);
+t_bool	collect_instructions(char **inst);
 t_bool	ft_get_stdin(t_list **stack_a, t_list **stack_b);
 
 #endif

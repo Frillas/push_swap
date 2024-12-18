@@ -30,14 +30,14 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 t_bool	ft_check_sort(t_list *head)
 {
 	if (head == NULL)
-		return (1);
+		return (TRUE);
 	while (head->next != NULL)
 	{
 		if (head->content > head->next->content)
-			return (1);
+			return (TRUE);
 		head = head->next;
 	}
-	return (0);
+	return (FALSE);
 }
 
 t_list	*find_end(t_list *head)
@@ -45,4 +45,31 @@ t_list	*find_end(t_list *head)
 	while (head->next != NULL)
 		head = head->next;
 	return (head);
+}
+
+t_bool	ft_check_str(char *str)
+{
+	if (!ft_strncmp(str, "sa\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "sb\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "ss\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "pa\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "pb\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "ra\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "rb\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "rr\n", 4))
+		return (TRUE);
+	else if (!ft_strncmp(str, "rra\n", 5))
+		return (TRUE);
+	else if (!ft_strncmp(str, "rrb\n", 5))
+		return (TRUE);
+	else if (!ft_strncmp(str, "rrr\n", 5))
+		return (TRUE);
+	return (FALSE);
 }
